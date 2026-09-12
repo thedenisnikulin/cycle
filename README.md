@@ -7,7 +7,6 @@ echo true | cycle                # false
 echo 41 | cycle                  # 42
 echo 2026-09-11 | cycle --prev   # 2026-09-10
 echo 0x0f | cycle                # 0x10
-echo v1.2.9 | cycle              # v1.2.10
 echo Monday | cycle --prev       # Sunday
 echo '[ ]' | cycle               # [x] (markdown)
 ```
