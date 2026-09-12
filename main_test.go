@@ -253,22 +253,6 @@ func TestStepNumber(t *testing.T) {
 	})
 }
 
-func TestStepSemver(t *testing.T) {
-	checkStep(t, "stepSemver", stepSemver, []stepCase{
-		{"1.2.3", false, "1.2.4"},
-		{"1.2.3", true, "1.2.2"},
-		{"0.0.0", false, "0.0.1"},
-		{"1.2.0", true, "1.2.0"}, // patch stops at 0
-		{"1.2.9", false, "1.2.10"},
-		{"10.20.30", false, "10.20.31"},
-		{"v1.2.9", false, "v1.2.10"},
-		{"V2.0.10", true, "V2.0.9"},
-	}, []string{
-		"", "1", "1.2", "1.2.3.4", "1.2.3-rc.1", "1.2.x", "v", "x1.2.3", "1..3",
-		"1.2.99999999999999999999",
-	})
-}
-
 func TestStepDate(t *testing.T) {
 	checkStep(t, "stepDate", stepDate, []stepCase{
 		// dates step by a day

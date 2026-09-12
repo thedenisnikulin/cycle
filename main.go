@@ -112,12 +112,10 @@ var (
 		"2006-01-02T15:04:05": time.Second,
 	}
 
-	semverRe = regexp.MustCompile(`^([vV]?\d+\.\d+\.)(\d+)$`)
 	numberRe = regexp.MustCompile(`^([+-]?)(0[xXbBoO])?([0-9a-fA-F]+)$`)
 
 	steps = []Step{
 		stepDate,
-		stepSemver,
 		stepWord,
 		stepNumber,
 	}
@@ -153,24 +151,6 @@ func stepDate(s string, prev bool) (string, bool) {
 	}
 
 	return "", false
-}
-
-func stepSemver(s string, prev bool) (string, bool) {
-	m := semverRe.FindStringSubmatch(s)
-
-	if m == nil {
-		return "", false
-	}
-
-	patch, err := strconv.Atoi(m[2])
-
-	if prev {
-		patch--
-	} else {
-		patch++
-	}
-
-	return m[1] + strconv.Itoa(max(patch, 0)), err == nil
 }
 
 func stepWord(s string, prev bool) (string, bool) {
